@@ -1,0 +1,132 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Afterframe — Install & Use</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f0e6;--ink:#18211f;--teal:#2a7068;--copper:#c46828;--mid:#6b726d;--rule:#ddd6c7;--card:#fbf8f1}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'DM Sans',system-ui,sans-serif;font-size:16px;line-height:1.6;padding-bottom:70px;-webkit-font-smoothing:antialiased}
+.wrap{max-width:820px;margin:0 auto;padding:0 26px}
+.dot{display:inline-block;width:.36em;height:.36em;border-radius:50%;background:var(--copper);margin-left:.03em}
+header{padding:52px 0 18px}
+.kick{font-size:13px;font-weight:700;letter-spacing:.04em;color:var(--teal);margin-bottom:10px}
+h1{font-weight:800;font-size:40px;letter-spacing:-.03em}
+.lede{font-size:18px;color:#3c4541;margin-top:12px;max-width:62ch}
+section{border-top:1px solid var(--rule);padding:30px 0}
+h2{font-weight:800;font-size:24px;letter-spacing:-.02em;margin-bottom:4px}
+.sec-num{color:var(--copper);font-weight:800}
+h3{font-weight:700;font-size:17px;margin:18px 0 4px}
+p{margin:8px 0;color:#2c3531}
+ol,ul{margin:8px 0 8px 4px}
+ol li,ul li{margin:7px 0 7px 22px}
+.pro{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.08em;color:#fff;background:var(--copper);padding:2px 8px;border-radius:5px;vertical-align:middle;margin-left:6px}
+.k{font-family:ui-monospace,Menlo,monospace;font-size:13.5px;background:var(--card);border:1px solid var(--rule);border-radius:5px;padding:1px 7px}
+.card{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:16px 20px;margin:14px 0}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:15px}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--mid)}
+td b{color:var(--ink)}
+.tip{background:#fff7ef;border:1px solid #e7c9ab;border-radius:10px;padding:13px 18px;margin:14px 0;font-size:15px}
+.tip b{color:var(--copper)}
+.foot{font-size:13px;color:var(--mid);border-top:1px solid var(--rule);padding-top:18px;margin-top:8px}
+a{color:var(--teal)}
+</style></head>
+<body><div class="wrap">
+
+<header>
+  <div class="kick">Starting Frame</div>
+  <h1>Afterframe — Install &amp; Use<span class="dot"></span></h1>
+  <p class="lede">Afterframe sends your Blender camera and objects into After Effects — the camera move, lens, and rotation matched frame for frame — as one self-contained script. No plugins, no dependencies.</p>
+</header>
+
+<section>
+  <h2><span class="sec-num">1.</span> Install (30 seconds)</h2>
+  <ol>
+    <li>In Blender: <b>Edit ▸ Preferences ▸ Add-ons ▸ Install…</b></li>
+    <li>Pick the Afterframe <span class="k">.zip</span> you downloaded (don't unzip it first).</li>
+    <li>Tick the checkbox to enable it. The panel appears in the 3D View's <b>N-panel</b> (press <span class="k">N</span>) under the <b>Afterframe</b> tab.</li>
+  </ol>
+  <p>Works in Blender 4.0 and up. Settings live on the window, so it's fine even with linked/BlenderKit scenes.</p>
+</section>
+
+<section>
+  <h2><span class="sec-num">2.</span> The panel, field by field</h2>
+  <table>
+    <tr><th>Field</th><th>What it does</th></tr>
+    <tr><td><b>World Scale</b></td><td>Pixels per Blender unit. <b>100</b> is a good default (100&nbsp;px = 1&nbsp;Blender unit). Bigger = a bigger comp-space scene.</td></tr>
+    <tr><td><b>Comp Name</b></td><td>Names the After Effects comp. Leave blank to use your scene name.</td></tr>
+    <tr><td><b>Nulls</b></td><td>Which objects become AE nulls: <b>Selected objects</b> (just what you've picked), <b>All objects</b>, or <b>All empties</b>. Every null carries position <i>and</i> rotation.</td></tr>
+    <tr><td><b>Output</b></td><td>Where the <span class="k">.jsx</span> is written. Leave blank → next to your <span class="k">.blend</span> (or your Desktop if the file isn't saved). Pick a folder and it uses the Comp Name as the filename.</td></tr>
+    <tr><td><b>Plate</b> <span class="pro">PRO</span></td><td>Optional. Point at the <i>first frame</i> of your rendered footage — it's imported as the background and <b>conformed to your scene's frame rate automatically</b> (no hand-interpreting to 24/30).</td></tr>
+    <tr><td><b>Screen</b> <span class="pro">PRO</span></td><td>Optional. The mesh you want to replace (e.g. a phone screen). Turns on screen replacement.</td></tr>
+    <tr><td><b>Screen Comp</b> <span class="pro">PRO</span></td><td>Optional. The <i>name</i> of an existing AE comp to seat on the screen (anchor auto-set to half its size, scaled + oriented). Adapts to whatever you point it at.</td></tr>
+    <tr><td><b>Screen Media</b> <span class="pro">PRO</span></td><td>Optional. A file (PNG/MOV) to seat instead of a comp.</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2><span class="sec-num">3.</span> Export &amp; bring into After Effects</h2>
+  <ol>
+    <li>Set your active scene camera and frame range.</li>
+    <li>Choose <b>Nulls</b> and select what you want exported.</li>
+    <li>Click <b>Export .jsx for After Effects</b>.</li>
+    <li>In After Effects: <b>File ▸ Scripts ▸ Run Script File…</b> → pick the <span class="k">.jsx</span>.</li>
+  </ol>
+  <p>It builds a comp at your render resolution and fps, with everything parented to a <span class="k">BLENDER_WORLD</span> null so Blender's origin lands at the comp center.</p>
+</section>
+
+<section>
+  <h2><span class="sec-num">4.</span> Screen replacement <span class="pro">PRO</span></h2>
+  <p>Two ways — both seat your content on the tracked surface, scaled, oriented, anchored, riding the move:</p>
+  <h3>A. One-step (in Blender)</h3>
+  <p>Set <b>Screen</b> = your screen mesh, and either <b>Screen Comp</b> (an existing AE comp's name) or <b>Screen Media</b> (a file). Export and run the <span class="k">.jsx</span> — the replacement is already seated as a <span class="k">SCREEN_REPLACE</span> layer.</p>
+  <h3>B. Seat Selected (in After Effects, name-agnostic)</h3>
+  <p>If you'd rather keep your content as a live, editable AE comp:</p>
+  <ol>
+    <li>Set <b>Screen</b> = your screen mesh in Blender, leave Comp/Media blank, export, and run the <span class="k">.jsx</span>. It drops an <span class="k">AF_SCREEN</span> null that carries the seating.</li>
+    <li>In AE, add <i>any</i> content (a comp or footage) and <b>select that layer</b>.</li>
+    <li>Run <b>AfterframeSeatSelected.jsx</b> (File ▸ Scripts ▸ Run Script File). It seats the selected layer onto <span class="k">AF_SCREEN</span> — anchor set to half its size, scaled, oriented, riding the spin.</li>
+  </ol>
+</section>
+
+<section>
+  <h2><span class="sec-num">5.</span> What the script builds</h2>
+  <table>
+    <tr><th>Layer</th><th>What it is</th></tr>
+    <tr><td><span class="k">BLENDER_WORLD</span></td><td>A null at the comp center — Blender's origin. Everything is parented to it.</td></tr>
+    <tr><td>Camera</td><td>Your Blender camera: position, orientation, and lens (zoom), animated per frame.</td></tr>
+    <tr><td>Your nulls</td><td>One 3D null per exported object — position + rotation, tracking moves and spins.</td></tr>
+    <tr><td><span class="k">AF_SCREEN</span> <span class="pro">PRO</span></td><td>The seating null for screen replacement (used by Seat Selected).</td></tr>
+    <tr><td><span class="k">SCREEN_REPLACE</span> <span class="pro">PRO</span></td><td>Your replacement content, seated on the screen (one-step mode).</td></tr>
+    <tr><td><span class="k">PLATE</span> <span class="pro">PRO</span></td><td>Your rendered footage, conformed to the scene fps, as the background.</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2><span class="sec-num">6.</span> Tips &amp; troubleshooting</h2>
+  <ul>
+    <li><b>Plate looks wrong / won't show:</b> for the background, render a <b>single-layer EXR or PNG/MOV</b>. Multilayer EXRs need an extra plugin (EXtractoR) to pull a pass — not needed for a plain plate.</li>
+    <li><b>Replacement content sideways or off:</b> in Seat Selected mode it reads the size off your selected layer — make sure that layer is the content you want, then run it.</li>
+    <li><b>Nothing exported / "no camera":</b> set an active scene camera (Scene properties) before exporting.</li>
+    <li><b>The screen mesh:</b> Afterframe finds the screen's front face automatically — you don't need to clean its object axis.</li>
+  </ul>
+  <div class="tip"><b>Frame rate:</b> the Plate field conforms your footage to the scene fps on import — set your Blender scene fps to match your footage and it just lines up.</div>
+</section>
+
+<section>
+  <h2><span class="sec-num">7.</span> Free vs Pro</h2>
+  <table>
+    <tr><th></th><th>Free</th><th>Pro</th></tr>
+    <tr><td>Camera + nulls export (position + rotation)</td><td>✓</td><td>✓</td></tr>
+    <tr><td>Self-contained <span class="k">.jsx</span>, no dependencies</td><td>✓</td><td>✓</td></tr>
+    <tr><td>One-click screen replacement (auto-seat)</td><td>—</td><td>✓</td></tr>
+    <tr><td>Seat Selected companion script</td><td>—</td><td>✓</td></tr>
+    <tr><td>Plate reconnect + fps conform</td><td>—</td><td>✓</td></tr>
+  </table>
+  <p>Prefer DaVinci Resolve? <b>BlendFusion</b> is the same idea for Resolve/Fusion — or get both in the bundle.</p>
+</section>
+
+<div class="foot">
+  Afterframe v0.1.0 · GPL-3.0 · Made by <a href="https://startingframe.com">Starting Frame</a><br>
+  Questions: startingframe.com
+</div>
+</div></body></html>
